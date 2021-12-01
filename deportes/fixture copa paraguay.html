@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Torneo Clausura | Deportes</title>
+	<link rel="stylesheet" href="fonts.css">
+	<link rel="stylesheet" href="stylesports.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="./css2.css" rel="stylesheet">
+	<script src="../handlebars.min-v4.7.7.js"></script>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="main" id="data" style="width: 1350px;
+		margin: auto;"></div>
+	</div>
+	<script id="t-tabla" type="text/x-handlebars-template">
+		<div class="titulos">
+			<div class="titulo">
+				<div class="deporte">COPA PARAGUAY</div>
+				<div class="torneo">2021</div>
+			</div>
+			<div class="subtitulo">FINAL</div>
+		</div>
+		{{#each partido}}
+		<div class="partido" >
+			<div class="team team-1">
+				<div class="logo" style="background-image: url('./escudos/{{logo local}}.png');"></div>
+				<div class="name">{{local}}</div>
+				{{#if gol_local}}
+					<div class="gol">{{gol_local}}</div>
+				{{/if}}
+			</div>
+			<div class="separador"></div>
+			<div class="team team-2">
+				{{#if gol_visitante}}
+					<div class="gol">{{gol_visitante}}</div>
+				{{/if}}
+				<div class="name">{{visitante}}</div>
+				<div class="logo" style="background-image: url('./escudos/{{logo visitante}}.png');"></div>
+			</div>
+		</div>
+		<div class="schedule">
+			<span>{{fecha}} {{hora}} · {{estadio}}</span>
+			<span>Árbitro: {{arbitro}}</span>
+		</div>
+		{{/each}}
+	</script>
+	<script defer>
+
+		var table_data = {
+			partido: [
+				{
+					"local": "Sol de América",
+					"gol_local": "",
+					"gol_visitante": "",
+					"visitante": "Olimpia",
+					"estadio": "Defensores del Chaco",
+					"fecha": "Hoy, 19:00 hs",
+					"hora": "",
+					"arbitro": "José Méndez"
+				}
+			]
+		};
+
+
+		Handlebars.registerHelper("normal", function (equipo) {
+			return equipo.replace("Ã±", "ñ").replace("Ã©", "é").replace("Ã­", "í").replace("Ãº", "ú").replace(" (*)", "");
+		});
+
+		Handlebars.registerHelper("logo", function (equipo) {
+			n = equipo.replace("Ã±", "ñ").replace("Ã©", "é").replace("Ã­", "í").replace("Ãº", "ú");
+			return n.split(" ")[0];
+		});
+
+
+		function tabla() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					tabla_info = JSON.parse(xhttp.responseText);
+					let source = document.getElementById("t-tabla").innerHTML;
+					let html = Handlebars.compile(source);
+					document.getElementById("data").innerHTML = html(tabla_info);
+				}
+			};
+			xhttp.open("GET", "./tabla_de_posiciones_eliminatorias.json", true);
+			xhttp.send();
+		};
+		//tabla();
+
+		function render() {
+			let source = document.getElementById("t-tabla").innerHTML;
+			let html = Handlebars.compile(source);
+			document.getElementById("data").innerHTML = html(table_data);
+		}
+		render()
+	</script>
+</body>
+
+</html>

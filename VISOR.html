@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Apoyos AN</title>
+
+	<style>
+		*{
+			padding: 0; margin: 0;
+		}
+
+		@keyframes zoom {
+			0%{
+				background-position: center;
+				background-size: contain;
+				background-repeat: no-repeat;
+				height: 900px;
+				width: 70%;
+				color: tan;
+				transform: scale(1);
+			}
+			100%{
+				height: 100vh;
+				width: 100%;
+				background-repeat: no-repeat;
+				background-position: center 180%;
+				background-color: rgba(0, 0, 0, .5);
+				transform: scale(1.8);
+			}
+		}
+
+		.main{
+			position: absolute;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			width: 100%;
+			overflow: hidden;
+			z-index: 3;
+		}
+
+		.tapa{
+			/*background-color: tan;*/
+			background-image: url("uh.jpg");
+			background-position: center;
+			background-size: auto 750px;
+			background-repeat: no-repeat;
+			height: 750px;
+			width: 100%;
+			color: tan;
+			/*transition: all 0.25s ease-in-out*/
+		}
+
+		.tapa-mostrar{
+			height: 100vh;
+			background-repeat: no-repeat;
+			background-color: rgba(0, 0, 0, .5);
+			background-size: 1220px auto;
+  			transition: all 0.25s ease-in-out;
+		}
+		
+		#myVideo {
+			position: fixed;
+			right: 0;
+			bottom: 0;
+			min-width: 100%;
+			min-height: 100%;
+			z-index: 1;
+		}
+
+		.info{
+			display: block;
+			position: absolute;
+			top: 5px;
+			right: 5px;
+			z-index: 5000;
+			color: snow;
+		}
+
+	</style>
+</head>
+<body>
+
+	<video autoplay muted loop id="myVideo">
+		<source src="./OVERLAY FONDO AN.mp4" type="video/mp4">
+	  </video>
+	<div class="info">
+		X: <span id="cursorX"></span><br><br>
+		Y: <span id="cursorY"></span>
+	</div>
+	<div class="main">
+		<div class="tapa" id="c-tapa">
+			
+		</div>
+	</div>
+	<script type="text/javascript" async>
+		
+		
+		/*window.onload = init;
+		var x =0; y=0;
+		function init() {
+			if (window.Event) {
+				document.captureEvents(Event.MOUSEMOVE);
+			}
+				document.onmousemove = getCursorXY;
+		}
+
+		function getCursorXY(e) {
+			x = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);
+			y = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
+			document.getElementById('cursorX').innerHTML = x;
+			document.getElementById('cursorY').innerHTML = y;
+		}*/
+
+		var tapa = document.getElementById("c-tapa");
+
+		function mover_tapa(e){
+				var y =  -e.offsetY / 2 + 180;
+				document.getElementById('cursorX').innerHTML = e.offsetX;
+				document.getElementById('cursorY').innerHTML = e.offsetY + " = " + y;
+				
+				tapa.style.backgroundPositionY = y + "px";
+			}
+
+		tapa.addEventListener("click", function(e){
+			tapa.classList.toggle("tapa-mostrar");
+			if(tapa.classList.contains("tapa-mostrar")){
+				tapa.style.backgroundPositionY = "180px"
+				tapa.addEventListener("mousemove", mover_tapa, true)
+			} else {
+				//tapa.style.backgroundPositionY = "0px";
+				tapa.removeEventListener("mousemove", mover_tapa, false)
+			}
+		});
+
+		
+
+		/**
+		 * arriba -230 * x = 180
+		 * 
+		 * 
+		 * 
+		 * abajo 10 * x = 430
+		*/
+
+</script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pronóstico del Tiempo</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="./deportes/fonts.css" rel="stylesheet">
+	<link rel="stylesheet" href="bootstrap-icons.css">
+	<script src="./handlebars.min-v4.7.7.js"></script>
+	<script src="./d3.v4.min.js"></script>
+	<script src="https://use.fontawesome.com/c9edd68435.js"></script>
+
+	<style>
+		*{margin: 0; padding: 0; font-family: 'Lato', sans-serif; color: #eeeeee;}
+		
+		.container{
+			min-height: 100vh;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			background: rgb(22, 22, 22, .2);
+			/*background-image: url('./fondo\ 2.jpg');*/
+			background-size: cover;
+			background-attachment: fixed;
+			background-position: center;
+			font-size: 1.5em;
+			font-weight: 900;
+		}
+
+		.weather{
+			width: 1580px;
+			padding: 30px;
+			background-color: rgba(11, 16, 77, 0.849);
+			background: linear-gradient(353deg, rgba(0, 0, 0, 0.24) 16%, rgb(49, 49, 49) 91%); 
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			border-bottom: #C41E1E solid 5px;
+			border-radius: 15px;
+		}
+
+		.hoy-container{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			margin-bottom: 20px;
+		}
+
+		.ahora-info{
+			width: 150px;
+		}
+
+		.hoy-forecast{
+			width: 500px;
+			display: flex;
+			flex-direction: row;
+		}
+
+		.alerta{
+			width: 350px;
+		}
+
+		.alerta * {
+			margin-bottom: 5px;
+		}
+
+		.alerta h4{
+			background-color: #C41E1E;
+			padding: 5px;
+		}
+
+
+		.title{
+			font-size: 3em;
+		}
+
+		.city{
+			font-size: 2em;
+		}
+
+		.head{
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+		}
+
+		
+		.body-pronostico{
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.descripcion-ahora{
+			font-size: 1.5em;
+			margin-bottom: 15px;
+		}
+
+
+		.dia {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: start;
+			align-items: center;
+			padding: 10px;
+			font-size: 1.2em;
+		}
+
+
+		.dia .w-img{
+			width: 105px;
+			height: 55px;
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			
+		}
+		.temp{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			align-items: center;
+			height: 45px;
+		}
+
+		.temp span{
+			text-align: center;
+			margin: 0 10px;
+		}
+
+		.forecast-descri{
+			text-align: center;
+		}
+
+		.day{
+			font-size: 1em;
+			display: block;
+			padding: 0 10px;
+		}
+
+		.descri{
+			width: 100%;
+			margin: 10px;
+		}
+
+		.descri::first-letter, .ahora_descri::first-letter{
+			text-transform: uppercase;
+		}
+
+
+		.current_temperature{
+			display: flex;
+			flex-direction: row;
+			margin: 5px;
+		}
+
+
+		.chart{
+			width: 100%;
+			margin: 20px 0;
+		}
+
+
+		.now_temperature {
+			font-size: 5.3em;
+			line-height: 1em;
+		}
+
+		.current_icon{
+			width: 70px; height: 70px;
+			background-position: center;
+		}
+
+
+		.fuente {
+			margin: 20px 0;
+		}
+
+		.extendido{
+
+			display: flex;
+			flex-direction: row;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="weather" id="data"></div>
+	</div>
+
+	<script id="t-ahora" type="text/x-handlebars-template">
+		
+	</script>
+
+	<script id="t-pronostico" type="text/x-handlebars-template">
+		<div class="head">
+			<span class="city">Asunción, PY</span><span class="title">Pronóstico del tiempo</span>
+		</div>	
+
+		<div class="extendido">
+			
+			{{#each  pronostico_extendido}}
+			<div class="dia" id="dia-{{@index}}">
+				<div class="w-img" style="background-image: url(https://www.meteorologia.gov.py/{{icon}});"></div>
+				<div class="day">{{dia}}</div> 
+				<div class="temp">
+					{{min}} / {{max}}
+				</div>
+				<div class="forecast-descri">
+					{{description}}
+				</div>
+			</div>
+			{{/each}}
+		</div>
+		<div class="fuente">
+			<i class="bi bi-twitter"></i>
+			&nbsp;@a24compy
+		</div>
+    </script>
+
+
+	<script defer>
+		var pronostico_data = {};
+
+
+		function pronostico(info){
+			tabla_info = JSON.parse(xhttp.responseText);
+			let source = document.getElementById("t-pronostico").innerHTML;
+			let html = Handlebars.compile(source);
+			document.getElementById("data").innerHTML = html(tabla_info);
+		}
+
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				pronostico(JSON.parse(this.responseText));
+			}
+		};
+
+		const url =  "./pronostico.json"
+		xhttp.open("GET", url, true)
+		xhttp.send();
+
+		
+
+
+	</script>
+</body>
+</html>
+

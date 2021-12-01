@@ -1,0 +1,185 @@
+*{margin: 0; padding: 0; font-family: 'Roboto', sans-serif; color: #eeeeee;}
+
+.container{
+	min-height: 100vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: rgb(22, 22, 22, .2);
+	/*background-image: url('./fondo\ 2.jpg');*/
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center;
+}
+
+.weather{
+	width: 1050px;
+	padding: 30px;
+	background-color: rgba(11, 16, 77, 0.849);
+	background: linear-gradient(353deg, rgba(0, 0, 0, 0.24) 16%, rgb(49, 49, 49) 91%); 
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	border-bottom: #C41E1E solid 5px;
+	border-radius: 15px;
+}
+
+.hoy-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.ahora-info{
+	display: flex;
+	flex-direction: column;
+}
+
+.hoy-forecast{
+	display: flex;
+	flex-direction: row;
+}
+
+.alerta{
+	margin-top: 20px;
+	width: 350px;
+}
+
+.alerta * {
+	margin-bottom: 5px;
+}
+
+.alerta h4{
+	background-color: #C41E1E;
+	padding: 5px;
+}
+
+
+.title{
+	font-size: 3em;
+}
+
+.city{
+	font-size: 2em;
+}
+
+.head{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+}
+
+
+.body-pronostico{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.descripcion-ahora{
+	font-size: 2em;
+	margin-bottom: 15px;
+}
+
+
+.dia {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+	padding: 10px;
+	font-size: 1.2em;
+}
+
+
+.dia .w-img{
+	width: 105px;
+	height: 55px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	
+}
+.temp{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	height: 45px;
+}
+
+.temp span{
+	text-align: center;
+	margin: 0 10px;
+}
+
+.forecast-descri{
+	text-align: center;
+}
+
+.day{
+	font-size: 1em;
+	display: block;
+	padding: 0 10px;
+}
+
+.descri{
+	width: 100%;
+	margin: 10px;
+}
+
+.descri::first-letter, .ahora_descri::first-letter{
+	text-transform: uppercase;
+}
+
+
+.current_temperature{
+	display: flex;
+	flex-direction: row;
+	margin: 5px;
+}
+
+.current_descripcion{
+	font-size: 1.5em;
+}
+
+
+.chart{
+	width: 100%;
+	margin: 20px 0;
+}
+
+
+.temp_now {
+	font-size: 5.3em;
+	line-height: 1em;
+}
+
+.now_temperature{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 450px;
+}
+
+.current_icon{
+	width: 70px; height: 70px;
+	background-position: center;
+}
+
+
+.fuente {
+	font-size: 1.2em;
+}
+
+.extendido{
+
+	display: flex;
+	flex-direction: row;
+}

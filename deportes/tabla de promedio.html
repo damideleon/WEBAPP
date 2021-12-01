@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tabla de Promedios | Deportes</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="css2.css" rel="stylesheet">
+	<link rel="stylesheet" href="./fonts.css">
+	<link rel="stylesheet" href="stylesports.css">
+	<script src="../handlebars.min-v4.7.7.js"></script>
+</head>
+<body>
+	
+	<div class="container" >
+		<div class="main" id="data"></div>
+	</div>
+	<script id="t-tabla" type="text/x-handlebars-template">
+		<div class="titulos">
+			<div class="titulo">
+				<div class="deporte">APF | Fútbol de Primera</div>
+				<div class="torneo">2021</div>
+			</div>
+			<div class="subtitulo">Tabla de Promedios</div>
+		</div>
+		<div class="tab-container">
+			<table class="table">
+			<thead>
+				<tr>
+					<td class="n"></td>
+					<td class="g" colspan="2"></td>
+					<td class="n">2019</td>
+					<td class="n">2020</td>
+					<td class="n">2021</td>
+					<td class="n">PJ</td>
+					<td class="n">Total</td>
+					<td class="n">Prom.</td>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each tabla}}
+				<tr>
+					<td class="n">{{pos}}.</td>
+					<td class="p" style="background-image: url('./escudos/{{logo equipo}}.png');"> 
+					</td>
+					<td class="g">{{normal equipo}}</td>
+					<td class="n">{{2019}}</td>
+					<td class="n">{{2020}}</td>
+					<td class="n">{{2021}}</td>
+					<td class="n">{{pj}}</td>
+					<td class="n">{{total}}</td>
+					<td class="n pt">{{prom}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+		<p>
+			@americatvpy
+		</p>
+	</script>
+	<script defer>
+		Handlebars.registerHelper("normal", function(equipo) {
+			return equipo.replace("Ã±", "ñ").replace("Ã©", "é").replace("Ã­", "í").replace("Ãº", "ú");
+		});
+
+		Handlebars.registerHelper("logo", function (equipo) {
+			n = equipo.replace("Ã±", "ñ").replace("Ã©", "é").replace("Ã­", "í").replace("Ãº", "ú");
+			return n.split(" ")[0];
+		});
+
+
+	function tabla(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				tabla_info = JSON.parse(xhttp.responseText);
+				let source = document.getElementById("t-tabla").innerHTML;
+				let html = Handlebars.compile(source);
+				document.getElementById("data").innerHTML = html(tabla_info);
+			}
+		};
+		xhttp.open("GET", "./tabla_de_promedios_paraguay.json", true);
+		xhttp.send();
+	};
+	tabla();
+	</script>
+</body>
+</html>
+

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tabla de Posiciones | Deportes</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="./fonts.css">
+	<link href="./css2.css" rel="stylesheet">
+	<script src="../handlebars.min-v4.7.7.js"></script>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			font-family: 'Lato', 'Proxima Nova', sans-serif;
+			color: #f1f1f1;
+		}
+
+		@keyframes movebackground {
+			0%{
+				background-position: 0% 0%;
+			}
+			50% {
+				background-position: 100% 100%;
+			}
+			100%{
+				background-position: 0% 0%;
+			}
+		}
+		
+		.container{
+			height: 100vh;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			z-index: 2;
+			position: fixed;
+			background-image: url('./backqatar.png');
+			background-size: cover;
+			background-repeat: no-repeat;
+			animation: movebackground 5s ease-in-out infinite;
+		}
+
+		.main{
+			width: 900px;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.titulos{
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.titulo{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			font-size: 1.8em;
+			background-color: #f1f1f1;
+			padding-left: 10px;
+			height: 68px;
+		}
+
+
+
+		.titulo .deporte{
+			font-size: 1.5em;
+			color: #272727;
+		}
+
+		.titulo .torneo {
+			background-color: #5a1738;
+			padding: 10px;
+		}
+		.subtitulo{
+			font-size: 1.5em;
+			color: #fff;
+			background: #272727;
+			padding: 10px;
+		}
+
+		.tab-container{
+			background-color: #f1f1f1;
+			padding: 10px 5px;
+		}
+
+		.table{
+			width: 100%;
+			font-size: 1.2em;
+			border-collapse: collapse;
+						
+		}
+
+		td{
+			font-size: 1.5em;
+			padding: 5px 10px;
+		}
+
+		thead tr td{
+			font-family: 'Roboto';
+			color: rgb(141, 141, 141);
+			font-weight: 400;
+		}
+
+		/*tbody tr{
+			background-image: linear-gradient( 150deg, #FFAA85 30%, #b33131 100%);
+			border-bottom: #FFAA85 2px solid; 
+		}*/
+
+		tbody tr:last-child{
+			border: none; 			
+		}
+
+		tbody tr td{
+			/*font-family: 'Roboto';*/
+			font-size: 1.3em;
+			font-weight: 400;
+			color: rgb(37, 37, 37);
+		}
+
+		.g{
+			font-size: 1.4em;
+			font-weight: 900;
+		}
+
+		.n{
+			text-align: right;
+		}
+
+		td img{
+			display: inline-block;
+			width: 50px;
+		}
+
+		.p{
+			width: 30px;
+			background-size: 30px auto;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+		#myVideo {
+			position: fixed;
+			right: 0;
+			bottom: 0;
+			min-width: 100%;
+			min-height: 100%;
+			z-index: 1;
+		}
+
+		p{
+			text-align: end;
+			padding: 10px;
+			color: #272727;
+		}
+
+	</style>
+</head>
+<body>
+	
+	<div class="container" >
+	<div class="main" id="data"></div>
+	</div>
+	<script id="t-tabla" type="text/x-handlebars-template">
+		<div class="titulos">
+			<div class="titulo"><div class="deporte">{{titulo}}</div> <div class="torneo">{{torneo}}</div></div>
+			<div class="subtitulo">Tabla de posiciones</div>
+		</div>
+		<div class="tab-container">
+			<table class="table">
+			<thead>
+				<tr>
+					<td class="n"></td>
+					<td class="g" colspan="2"></td>
+					<td class="n">PT</td>
+					<td class="n">PJ</td>
+					<td class="n">PG</td>
+					<td class="n">PE</td>
+					<td class="n">PP</td>
+					<td class="n">GF</td>
+					<td class="n">GE</td>
+					<td class="n">DF</td>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each tabla}}
+				<tr>
+					<td class="n">{{pos}}.</td>
+					<td class="p" style="background-image: url('./escudos conmebol/{{normal equipo}}.png');"> 
+					</td>
+					<td class="g">{{normal equipo}}</td>
+					<td class="n">{{puntos}}</td>
+					<td class="n">{{pj}}</td>
+					<td class="n">{{pg}}</td>
+					<td class="n">{{pe}}</td>
+					<td class="n">{{pp}}</td>
+					<td class="n">{{gf}}</td>
+					<td class="n">{{gc}}</td>
+					<td class="n">{{dif}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+		<p>
+			<span class="icon-twitter"></span> @americatvpy
+		</p>
+	</script>
+	<script defer>
+		Handlebars.registerHelper("normal", function(equipo) {
+			return equipo.replace("Ã±", "ñ").replace("Ã©", "é").replace("Ã­", "í").replace("Ãº", "ú").replace(" (*)", "");
+		});
+
+	function tabla(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				tabla_info = JSON.parse(xhttp.responseText);
+				let source = document.getElementById("t-tabla").innerHTML;
+				let html = Handlebars.compile(source);
+				document.getElementById("data").innerHTML = html(tabla_info);
+			}
+		};
+		xhttp.open("GET", "./tabla_de_posiciones_eliminatorias.json", true);
+		xhttp.send();
+	};
+	tabla();
+	</script>
+</body>
+</html>
+

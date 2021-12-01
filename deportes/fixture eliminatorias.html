@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tabla de Posiciones | Deportes</title>
+	<link rel="stylesheet" href="fonts.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="./css2.css"	rel="stylesheet">
+	<script src="../handlebars.min-v4.7.7.js"></script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			font-family: 'Lato', sans-serif;
+		}
+
+		@keyframes movebackground {
+			0%{
+				background-position: 0% 0%;
+			}
+			50% {
+				background-position: 100% 100%;
+			}
+			100%{
+				background-position: 0% 0%;
+			}
+		}
+		
+		.container{
+			height: 100vh;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			z-index: 2;
+			position: fixed;
+			background-image: url('./backqatar.png');
+			background-size: cover;
+			background-repeat: no-repeat;
+			animation: movebackground 5s ease-in-out infinite;
+		}
+
+		.main {
+			
+			display: flex;
+			flex-direction: column;
+			width: 70%;
+			margin: auto;
+		}
+
+		.titulos {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			margin-bottom: 15px;
+		}
+
+		.titulo {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			font-size: 1.58vw;
+			background-color: #f1f1f1;
+			padding-left: 10px;
+			height: 63px;
+		}
+
+		.titulo .deporte {
+			font-size: 1.5em;
+			color: #272727;
+		}
+
+		.titulo .torneo {
+			background: linear-gradient(90deg, rgba(109,20,63,1) 0%, rgba(77,15,45,1) 5%);
+			padding: 0px 15px;
+			color: seashell;
+			text-transform: uppercase;
+			font-weight: 400;
+			font-size: .7em;
+			height: 100%;
+			display: flex;
+			align-items: center;
+		}
+
+		.subtitulo {
+			font-size: 1.5em;
+			color: #fff;
+			background: #272727;
+			padding: 10px;
+		}
+
+
+		.partido {
+			display: flex;
+			font-size: 2.1vw;
+			height: 75px;
+			flex-direction: row;
+			justify-content: space-between;
+			background: rgb(255, 255, 255);
+		}
+
+		.team {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 40%;
+			padding: 0 20px;
+			/*background: purple;*/
+			color: #272727;
+		}
+
+		.logo {
+			width: 90px;
+			height: 90px;
+			background-position: center;
+			background-size:  auto 60px;
+			background-repeat: no-repeat;
+		}
+
+		.result {
+			display: flex;
+			align-items: center;
+		}
+
+		.schedule {
+			background: radial-gradient(circle, rgba(109,20,63,1) 0%, rgba(31,31,31,1) 78%);
+			display: flex;
+			align-items: center;
+			flex-direction: row;
+			justify-content: space-between;
+			color: #f1f1f1;
+			padding: 5px 10px;
+			font-family: 'Roboto';
+			font-size: .9em;
+			font-weight: lighter;
+			margin-bottom:5px;
+		}
+
+		.center{
+			justify-content: center;
+			font-size: 1.3em;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="main" id="data"></div>
+	</div>
+	<script id="t-tabla" type="text/x-handlebars-template">
+		<div class="main" id="data">
+			<div class="titulos">
+				<div class="titulo">
+					<div class="deporte">Eliminatorias Mundial Qatar 2022</div>
+					<div class="torneo">Fecha 14</div>
+				</div>
+				<div class="subtitulo">Resultados</div>
+			</div>
+			{{#each partido}}
+			<div class="partido">
+				<div class="team team-1">
+					<div class="logo" style="background-image: url('./escudos\ conmebol/{{local}}.png');"></div>
+					<div class="name">{{local}}</div>
+				</div>
+				<div class="result">
+					{{resultado}}
+				</div>
+				<div class="team team-2">
+					<div class="name">{{visitante}}</div>
+					<div class="logo" style="background-image: url('./escudos\ conmebol/{{visitante}}.png');"></div>
+				</div>
+			</div>
+			<div class="schedule">
+					<span>{{fecha}}</span>
+					<span>{{estadio}}, {{ciudad}}</span>
+			</div>
+			{{/each}}
+		</div>
+	</script>
+	<script defer>
+
+		var table_data = {
+			partido: [
+				{
+					"fecha": "Finalizado",
+					"ciudad": "La Paz",
+					"estadio": "Hernando Siles",
+					"local": "Bolivia",
+					"resultado": "3 ─ 0",
+					"visitante": "Uruguay"
+				},
+				{
+					"fecha": "Finalizado",
+					"ciudad": "Caracas",
+					"estadio": "Olímpico de la Universidad Central de Venezuela",
+					"local": "Venezuela",
+					"resultado": "1 ─ 2",
+					"visitante": "Perú"
+				},
+				{
+					"fecha": "Finalizado",
+					"ciudad": "Barranquilla",
+					"estadio": "Metropolitano Roberto Meléndez",
+					"local": "Colombia",
+					"resultado": "0 ─ 0",
+					"visitante": "Paraguay"
+				},
+				{
+					"fecha": "Finalizado",
+					"ciudad": "San Juan",
+					"estadio": "San Juan del Bicentenario",
+					"local": "Argentina",
+					"resultado": "0 ─ 0",
+					"visitante": "Brasil"
+				},
+				{
+					"fecha": "Finalizado",
+					"ciudad": "Santiago",
+					"estadio": "San Carlos de Apoquindo",
+					"local": "Chile",
+					"resultado": "0 ─ 2",
+					"visitante": "Ecuador"
+				}
+			]
+		};
+
+
+		Handlebars.registerHelper("normal", function (equipo) {
+			return equipo.replace("Ã±", "ñ").replace("Ã©", "é").replace("Ã­", "í").replace("Ãº", "ú").replace(" (*)", "");
+		});
+
+		Handlebars.registerHelper("logo", function (equipo) {
+			n = equipo.replace("Ã±", "ñ").replace("Ã©", "é").replace("Ã­", "í").replace("Ãº", "ú").replace(" (*)", "");
+			return n;
+		});
+
+		function tabla() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					tabla_info = JSON.parse(xhttp.responseText);
+					let source = document.getElementById("t-tabla").innerHTML;
+					let html = Handlebars.compile(source);
+					document.getElementById("data").innerHTML = html(tabla_info);
+				}
+			};
+			xhttp.open("GET", "./tabla_de_posiciones_eliminatorias.json", true);
+			xhttp.send();
+		};
+	//tabla();
+
+	function render(){
+		let source = document.getElementById("t-tabla").innerHTML;
+		let html = Handlebars.compile(source);
+		document.getElementById("data").innerHTML = html(table_data);
+	}
+
+	render()
+	</script>
+</body>
+
+</html>

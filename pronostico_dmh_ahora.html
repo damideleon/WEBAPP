@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pronóstico del Tiempo</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="./deportes/fonts.css" rel="stylesheet">
+	<link rel="stylesheet" href="./css/clima.css">
+	<link rel="stylesheet" href="bootstrap-icons.css">
+	<script src="./handlebars.min-v4.7.7.js"></script>
+	<script src="./d3.v4.min.js"></script>
+	<script src="https://use.fontawesome.com/c9edd68435.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="weather" id="data"></div>
+	</div>
+	<script id="t-pronostico" type="text/x-handlebars-template">
+		<div class="head">
+			<span class="city">Asunción, PY</span><span class="title">Pronóstico del tiempo</span>
+		</div>
+		<div class="hoy-container">
+			<div class="ahora-info">
+				<div class="now_temperature">
+					<div class="temp_now">{{asuncion.temp}}</div>
+				</div>
+				<div class="descripcion-ahora">{{asuncion.descricorta}}</div>
+				<div class="current_descripcion">
+					<div id="hoy-min-max"></div>
+					<div><i class="bi bi-droplet-fill"></i> {{asuncion.humedad}}</div>
+					<div><i class="bi bi-wind"></i> {{asuncion.viento}} {{asuncion.dir}}
+						
+					</div>
+					<div>Presión: {{asuncion.presion}}</div>
+					<div>Sensación Térmica: {{asuncion.sensacionTermica}}</div>
+					<div class="alerta">
+						{{#if alerta.vigencia}}
+							<h4>{{alerta.vigencia}}</h4>
+							<h3>{{alerta.titulo}}</h3>
+							<h5>{{alerta.fecha}} {{alerta.hora}}</h5>
+						{{/if}}
+					</div>
+				</div>
+			</div>
+			<div class="hoy-forecast">
+				{{#each  asuncion.dia}}
+				<div class="dia" id="dia-{{@index}}">
+					<div class="w-img" style="background-image: url(https://www.meteorologia.gov.py/{{icon}});"></div>
+					<div class="day">{{hora}}</div> 
+					<div class="temp">
+						{{temp}}
+					</div>
+					<div class="forecast-descri">
+						{{descripcion}}
+					</div>
+				</div>
+				{{/each}}
+			</div>
+		</div>
+		</div>
+		<div class="fuente">
+			<i class="bi bi-twitter"></i>
+			&nbsp;@a24compy
+		</div>
+    </script>
+
+	<script defer>
+		var pronostico_data = {};
+		function pronostico(info){
+			tabla_info = JSON.parse(xhttp.responseText);
+			let source = document.getElementById("t-pronostico").innerHTML;
+			let html = Handlebars.compile(source);
+			document.getElementById("data").innerHTML = html(tabla_info);
+		}
+
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				pronostico(JSON.parse(this.responseText));
+			}
+		};
+
+		const url =  "./pronostico.json"
+		xhttp.open("GET", url, true)
+		xhttp.send();
+
+		var xhttpOWM = new XMLHttpRequest();
+		xhttpOWM.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				data = JSON.parse(this.responseText);
+				console.log(data)
+				document.getElementById("hoy-min-max").innerHTML = "Min.: "+ Math.round(data.daily[0].temp.min - 275.15) + "º Max.: "+ Math.round(data.daily[0].temp.max - 275.15)+ "º";
+			}
+		};
+
+		const urlOWM = "https://api.openweathermap.org/data/2.5/onecall?lat=-25.30066&lon=-57.63591&exclude=minutely&lang=es&appid=f497ad49d905eec750c1c273a9ae8351"
+		xhttpOWM.open("GET", urlOWM, true)
+		xhttpOWM.send();
+
+
+	</script>
+</body>
+</html>
+

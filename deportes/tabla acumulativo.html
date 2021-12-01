@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tabla Acumulativo Anual | Deportes</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="css2.css" rel="stylesheet">
+	<link rel="stylesheet" href="./fonts.css">
+	<link rel="stylesheet" href="stylesports.css">
+	<script src="../handlebars.min-v4.7.7.js"></script>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="main" id="data">
+			<div class="titulos">
+				<div class="titulo">
+					<div class="deporte">Fútbol de Primera</div>
+					<div class="torneo">Torneo Clausura 2021</div>
+				</div>
+				<div class="subtitulo">Tabla de posiciones</div>
+			</div>
+			<div id="tabla"></div>
+		</div>
+	</div>
+	<script id="t-tabla" type="text/x-handlebars-template">
+		<div class="titulos">
+			<div class="titulo"><div class="deporte">APF | Fútbol de Primera</div> <div class="torneo">2021</div></div>
+			<div class="subtitulo">Acumulativo Anual</div>
+		</div>
+		<div class="tab-container">
+			<table class="table">
+			<thead>
+				<tr>
+					<td class="n"></td>
+					<td class="g" colspan="2"></td>
+					<td class="n">Pts.</td>
+					<td class="n">PJ</td>
+					<td class="n">DIF</td>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each tabla}}
+				<tr>
+					<td class="n">{{pos}}.</td>
+					<td class="p" style="background-image: url('./escudos/{{logo equipo}}.png');"> 
+					</td>
+					<td class="g">{{normal equipo}}</td>
+					<td class="n pt">{{pts}}</td>
+					<td class="n">{{pj}}</td>
+					<td class="n">{{dif}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+		<p>
+			@americatvpy
+		</p>
+	</script>
+	<script defer>
+
+		var table_data = {
+			tabla:
+				[
+					{
+						"2022": "Copa Libertadores (2da Fase)",
+						"Pos": 1,
+						"Equipo": "Cerro Porteño",
+						"Pts": 62,
+						"PJ": 34,
+						"G": 18,
+						"E": 8,
+						"P": 8,
+						"GF": 49,
+						"GC": 29,
+						"dif": 20
+					},
+					{
+						"2022": "Copa Libertadores (Grupos)",
+						"Pos": 2,
+						"Equipo": "Libertad",
+						"Pts": 59,
+						"PJ": 34,
+						"G": 17,
+						"E": 8,
+						"P": 9,
+						"GF": 60,
+						"GC": 34,
+						"dif": 26
+					},
+					{
+						"2022": "",
+						"Pos": 3,
+						"Equipo": "Guaraní",
+						"Pts": 59,
+						"PJ": 34,
+						"G": 17,
+						"E": 8,
+						"P": 9,
+						"GF": 60,
+						"GC": 43,
+						"dif": 17
+					},
+					{
+						"2022": "Copa Libertadores (1ra Fase)",
+						"Pos": 4,
+						"Equipo": "Nacional (P)",
+						"Pts": 50,
+						"PJ": 34,
+						"G": 12,
+						"E": 14,
+						"P": 8,
+						"GF": 42,
+						"GC": 38,
+						"dif": 4
+					},
+					{
+						"2022": "Copa Sudamericana (1ra Fase)",
+						"Pos": 5,
+						"Equipo": "Olimpia",
+						"Pts": 48,
+						"PJ": 34,
+						"G": 15,
+						"E": 3,
+						"P": 16,
+						"GF": 51,
+						"GC": 48,
+						"dif": 3
+					},
+					{
+						"2022": "",
+						"Pos": 6,
+						"Equipo": "Guaireña",
+						"Pts": 40,
+						"PJ": 34,
+						"G": 9,
+						"E": 13,
+						"P": 12,
+						"GF": 30,
+						"GC": 33,
+						"dif": "−3"
+					},
+					{
+						"2022": "",
+						"Pos": 7,
+						"Equipo": "12 de Octubre (I)",
+						"Pts": 40,
+						"PJ": 34,
+						"G": 9,
+						"E": 13,
+						"P": 12,
+						"GF": 37,
+						"GC": 44,
+						"dif": "−7"
+					},
+					{
+						"2022": "",
+						"Pos": 8,
+						"Equipo": "Sol de América",
+						"Pts": 39,
+						"PJ": 34,
+						"G": 10,
+						"E": 9,
+						"P": 15,
+						"GF": 37,
+						"GC": 49,
+						"dif": "−12"
+					},
+					{
+						"2022": "",
+						"Pos": 9,
+						"Equipo": "Sportivo Luqueño",
+						"Pts": 38,
+						"PJ": 34,
+						"G": 10,
+						"E": 8,
+						"P": 16,
+						"GF": 36,
+						"GC": 56,
+						"dif": "−20"
+					},
+					{
+						"2022": "",
+						"Pos": 10,
+						"Equipo": "River Plate",
+						"Pts": 28,
+						"PJ": 34,
+						"G": 6,
+						"E": 10,
+						"P": 18,
+						"GF": 28,
+						"GC": 56,
+						"dif": "−28"
+					}
+				]
+
+		}
+
+		Handlebars.registerHelper("normal", function (equipo) {
+			return equipo.replace("Ã±", "ñ").replace("Ã©", "é").replace("Ã­", "í").replace("Ãº", "ú");
+		});
+
+		Handlebars.registerHelper("logo", function (equipo) {
+			n = equipo.replace("Ã±", "ñ").replace("Ã©", "é").replace("Ã­", "í").replace("Ãº", "ú");
+			return n.split(" ")[0];
+		});
+
+		function tabla() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					tabla_info = JSON.parse(xhttp.responseText);
+					let source = document.getElementById("t-tabla").innerHTML;
+					let html = Handlebars.compile(source);
+					document.getElementById("data").innerHTML = html(tabla_info);
+				}
+			};
+			xhttp.open("GET", "./tabla_acumulativo.json", true);
+			xhttp.send();
+		};
+
+		tabla();
+
+
+		function render() {
+			let source = document.getElementById("t-tabla").innerHTML;
+			let html = Handlebars.compile(source);
+			document.getElementById("data").innerHTML = html(table_data);
+		}
+
+		//render()
+
+
+	</script>
+</body>
+
+</html>
