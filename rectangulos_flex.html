@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Rectangulos flex</title>
+	<style>
+		*{
+			padding: 0; margin: 0;
+		}
+		.container{
+			background: #ccc;
+			display: flex;
+			flex-direction: row;
+			width: 100%;
+			position: relative;
+			flex-wrap: wrap;
+			column-gap: 10px;
+			
+
+		}
+		.rectangulo {
+			background-color: orange;
+			width: 150px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			align-self: end;
+			
+		}
+		.main .rectangulo{
+			display: flex;
+			justify-self: stretch;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="column aside-1">
+			<div class="rectangulo rect-1" style="height: 85px;">1</div>
+			<div class="rectangulo rect-2" style="height: 150px;">2</div>
+			<div class="rectangulo rect-3" style="height: 200px;">3</div>
+			<div class="rectangulo rect-4" style="height: 520px;">4</div>
+			<div class="rectangulo rect-5" style="height: 360x;">5</div>
+		</div>
+		<div class="main">
+			<div class="rectangulo rect-6" style="height: 68px;">6</div>
+			<div class="rectangulo rect-7" style="height: 88px;">7</div>
+			<div class="rectangulo rect-8" style="height: 63px;">8</div>
+			<div class="rectangulo rect-9" style="height: 87px;">9</div>
+		</div>
+		<div class="column aside-2">
+			<div class="rectangulo rect-10" style="height: 98px;">10</div>
+			<div class="rectangulo rect-11" style="height: 22px;">11</div>
+			<div class="rectangulo rect-12" style="height: 90px;">12</div>
+			<div class="rectangulo rect-13" style="height: 56px;">13</div>
+			<div class="rectangulo rect-14" style="height: 79px;">14</div>
+			<div class="rectangulo rect-15" style="height: 57px;">15</div>
+		</div>
+		
+		
+		
+	</div>
+</body>
+</html>

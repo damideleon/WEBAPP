@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Julio César Cáceres</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="css2.css" rel="stylesheet">
+	<link rel="stylesheet" href="./fonts.css">
+	<link rel="stylesheet" href="stylesports.css">
+	<script src="../handlebars.min-v4.7.7.js"></script>
+</head>
+
+<style>
+	.info-data{
+		display: flex;
+		flex-direction: row;
+		column-gap: 30px;
+	}
+	.img-resena{
+		width: 300px; height: 400px;
+		background: #ccc;
+		background-image: url("./img/jcc.jpg");
+		background-position: center;
+		background-size: cover;
+	}
+	
+	.data-body{
+		width: calc(100% - 380px);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+
+	.data-body p {
+		font-size: 1.5em;
+	}
+
+	.table-resena{
+		width: 100%;
+		font-size: 2em;
+		font-weight: bolder;
+	}
+	
+</style>
+<body>
+	
+	<div class="container" >
+		<div class="main" id="data">
+			<div class="titulos">
+				<div class="titulo">
+					<div class="deporte">Julio César Cáceres</div>
+					<div class="torneo">Estadísticas</div>
+				</div>
+				<div class="subtitulo">Campeón de la Copa Paraguay 2021</div>
+			</div>
+			<div class="tab-container">
+				<div class="info-data">
+					<div class="img-resena"></div>
+					<div class="data-body">
+						<table class="table-resena">
+							<tr>
+								<td>Partidos</td>
+								<td class="n">6</td>
+							</tr>
+							<tr>
+								<td>Victorias</td>
+								<td class="n">2</td>
+							</tr>
+							<tr>
+								<td>Empates</td>
+								<td class="n">2</td>
+							</tr>
+							<tr>
+								<td>Derrotas</td>
+								<td class="n">2</td>
+							</tr>
+							<tr>
+								<td>Efectividad</td>
+								<td class="n">66%</td>
+							</tr>
+						</table>
+						<p>
+							<i class="icon icon-twitter"></i> @dvoamericapy
+						</p>
+
+					</div>
+				</div>
+			
+
+		</div>
+	</div>
+	<script id="t-tabla" type="text/x-handlebars-template">
+		
+	</script>
+	<script defer>
+		
+	</script>
+</body>
+</html>
+

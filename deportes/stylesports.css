@@ -58,14 +58,14 @@ div {
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
-	font-size: 1.58vw;
+	font-size: 1.70vw;
 	background-color: #EBEAEB;
 	padding-left: 10px;
 	height: 63px;
 }
 
 .titulo .deporte {
-	font-size: 1.5em;
+	font-size: 1.7em;
 	color: #1B1417;
 }
 
@@ -83,7 +83,7 @@ div {
 }
 
 .subtitulo {
-	font-size: 1.5em;
+	font-size: 2em;
 	color: #fff;
 	/*background: #AB1B39;*/
 	padding: 10px;
