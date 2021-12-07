@@ -1,0 +1,31 @@
+.w-01d{
+	background-image: url("./pronostico_tiempo/sol.svg");
+}
+.w-02d{
+	background-image: url("./pronostico_tiempo/sol-nublado.svg");
+}
+.w-03d, .w-03n{
+	background-image: url("./pronostico_tiempo/nube.svg");
+}
+
+.w-04d, .w-04n{
+	background-image: url("./pronostico_tiempo/nubes.svg");
+}
+
+
+.w-09d{
+	background-image: url("./pronostico_tiempo/sol\ lluvia.svg");
+}
+
+.w-09n{
+	background-image: url("./pronostico_tiempo/noche\ lluvia.svg");
+}
+
+
+.w-10d, .w-10n {
+	background-image: url("./pronostico_tiempo/lluvia\ fuerte.svg");
+}
+
+.w-11d, .w-11n {
+	background-image: url("./pronostico_tiempo/tormenta\ electrica.svg");
+}

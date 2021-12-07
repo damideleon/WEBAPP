@@ -22,28 +22,34 @@
 	<script id="t-tabla" type="text/x-handlebars-template">
 		<div class="titulos">
 			<div class="titulo">
-				<div class="deporte">APF | Torneo Clausura 2021</div>
-				<div class="torneo">Fecha 17</div>
+				<div class="deporte">Torneo Clausura 2021</div>
+				<div class="torneo">Fecha 18</div>
 			</div>
-			<div class="subtitulo">Resultados</div>
+			<div class="subtitulo">Programación</div>
 		</div>
 		{{#each partido}}
 		<div class="partido">
-			<div class="team team-1">
+			
 				<div class="logo" style="background-image: url('./escudos/{{logo local}}.png');"></div>
-				<div class="name">{{local}}</div>
+				<div class="names">
+					<div class="name">{{local}}</div>
 				{{#if gol_local}}
 					<div class="gol">{{gol_local}}</div>
+				{{else}}
+					<div class="vs">vs.</div>
 				{{/if}}
-			</div>
-			<div class="separador"></div>
-			<div class="team team-2">
+
+			
 				{{#if gol_visitante}}
+					<div class="separador"></div>
 					<div class="gol">{{gol_visitante}}</div>
 				{{/if}}
 				<div class="name">{{visitante}}</div>
+				</div>
+				
+			
 				<div class="logo" style="background-image: url('./escudos/{{logo visitante}}.png');"></div>
-			</div>
+			
 		</div>
 		<div class="schedule">
 			<span>{{fecha}} {{hora}}</span>
@@ -56,49 +62,49 @@
 		var table_data = {
 			partido: [
 				{
-					"local": "Sol de América",
-					"gol_local": "3",
-					"gol_visitante": "0",
-					"visitante": "Nacional",
-					"estadio": "Luis Alfonso Giagni",
-					"fecha": "Finalizado",
-					"hora": ""
-				},
-				{
-					"local": "Olimpia",
-					"gol_local": "2",
-					"gol_visitante": "3",
-					"visitante": "Libertad",
-					"estadio": "Manuel Ferreira",
-					"fecha": "Finalizado",
-					"hora": ""
-				},
-				{
-					"local": "River Plate",
-					"gol_local": "0",
-					"gol_visitante": "0",
-					"visitante": "Sportivo Luqueño",
+					"local": "Libertad",
+					"gol_local": "",
+					"gol_visitante": "",
+					"visitante": "River Plate",
 					"estadio": "Defensores del Chaco",
-					"fecha": "Finalizado",
-					"hora": ""
+					"fecha": "viernes, 3 de diciembre",
+					"hora": "19:30hs"
 				},
 				{
-					"local": "Guaireña",
-					"gol_local": "1",
-					"gol_visitante": "1",
-					"visitante": "Guaraní",
-					"estadio": "Parques del Guairá",
-					"fecha": "Finalizado",
-					"hora": ""
+					"local": "12 de Octubre",
+					"gol_local": "",
+					"gol_visitante": "",
+					"visitante": "Sol de América",
+					"estadio": "Luis Salinas",
+					"fecha": "sábado, 4 de diciembre",
+					"hora": "18:15hs"
 				},
 				{
-					"local": "Cerro Porteño",
-					"gol_local": "1",
-					"gol_visitante": "0",
-					"visitante": "12 de Octubre",
-					"estadio": "General Pablo Rojas",
-					"fecha": "Finalizado",
-					"hora": ""
+					"local": "Sportivo Luqueño",
+					"gol_local": "",
+					"gol_visitante": "",
+					"visitante": "Guaireña",
+					"estadio": "Feliciano Cáceres",
+					"fecha": "sábado, 4 de diciembre",
+					"hora": "18:15hs"
+				},
+				{
+					"local": "Guaraní",
+					"gol_local": "",
+					"gol_visitante": "",
+					"visitante": "Cerro Porteño",
+					"estadio": "Rogelio Livieres",
+					"fecha": "sábado, 4 de diciembre",
+					"hora": "20:30hs"
+				},
+				{
+					"local": "Nacional",
+					"gol_local": "",
+					"gol_visitante": "",
+					"visitante": "Olimpia",
+					"estadio": "Arsenio Erico",
+					"fecha": "domingo, 5 de diciembre",
+					"hora": "19:30hs"
 				}
 			]
 		};

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Julio César Cáceres</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="css2.css" rel="stylesheet">
+	<link rel="stylesheet" href="./fonts.css">
+	<link rel="stylesheet" href="stylesports.css">
+	<script src="../handlebars.min-v4.7.7.js"></script>
+</head>
+
+<style>
+	.info-data {
+		display: flex;
+		flex-direction: row;
+		column-gap: 30px;
+		margin-bottom: 30px;
+
+	}
+
+	.info-data:last-child {
+
+		margin-bottom: 0px;
+	}
+
+
+	.img-resena {
+		width: 400px;
+		height: 300px;
+		background: #ccc;
+		background-image: url("./img/jcc.jpg");
+		background-position: center;
+		background-size: cover;
+	}
+
+	.img-copalib {
+		background-image: url("./img/copalibertadores.jpg");
+	}
+
+	.img-copasud {
+		background-image: url("./img/sudamericana.jpg");
+	}
+
+	.data-body {
+		width: calc(100% - 380px);
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
+		align-items: flex-start;
+	}
+
+	.data-body p {
+		font-size: 1.5em;
+	}
+
+	.data-body-text {
+		width: 98%;
+	}
+
+	.data-body-text h1,
+	.data-body-text h3 {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.table-resena {
+		width: 100%;
+		font-size: 2em;
+		font-weight: bolder;
+	}
+</style>
+
+<body>
+
+	<div class="container">
+		<div class="main" id="data">
+			<div class="titulos">
+				<div class="titulo">
+					<div class="deporte"> Super Copa</div>
+					<div class="torneo">Venta de Entradas</div>
+
+				</div>
+				<div class="subtitulo">Final de Campeones 2021</div>
+			</div>
+			<div class="tab-container">
+				<div class="info-data">
+					<div class="">
+						<div class="schedule">
+							<span>12 dic., 19hs</span>
+							<span>Defensores del Chaco</span>
+						</div>
+						<div class="partido">
+							<div class="logo" style="background-image: url('./escudos/olimpia.png');"></div>
+							<div class="vs">vs.</div>
+							<div class="logo" style="background-image: url('./escudos/Cerro.png');"></div>
+						</div>
+					</div>
+					<div class="data-body">
+						<table class="table">
+							<thead>
+								<tr>
+									<td>Sectores Habilitados</td>
+									<td>Precio</td>
+									<td>Carnet</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>PREFERENCIA A</td>
+									<td>100.000 GS.</td>
+									<td>CARNET VERDE</td>
+								</tr>
+								<tr>
+									<td>PREFERENCIA B</td>
+									<td>100.000 GS.</td>
+									<td>CARNET VERDE</td>
+								</tr>
+								<tr>
+									<td>PREFERENCIA C</td>
+									<td>100.000 GS.</td>
+									<td>CARNET VERDE</td>
+								</tr>
+								<tr>
+									<td>PREFERENCIA D</td>
+									<td>100.000 GS.</td>
+									<td>CARNET VERDE</td>
+								</tr>
+								<tr>
+									<td>PREFERENCIA E</td>
+									<td>100.000 GS.</td>
+									<td>CARNET VERDE</td>
+								</tr>
+								<tr>
+									<td>PLATEA </td>
+									<td>60.000 GS.</td>
+									<td>CARNET VERDE</td>
+								</tr>
+								<tr>
+									<td>GRADERÍA NORTE</td>
+									<td>30.000 GS.</td>
+									<td>CARNET VERDE</td>
+								</tr>
+								<tr>
+									<td>GRADERÍA SUR</td>
+									<td>30.000 GS.</td>
+									<td>CARNET VERDE</td>
+								</tr>
+							</tbody>
+						</table>
+
+
+
+
+						<p>
+							@americatvpy
+						</p>
+					</div>
+				</div>
+
+
+
+
+			</div>
+		</div>
+		<script id="t-tabla" type="text/x-handlebars-template">
+
+	</script>
+		<script defer>
+
+		</script>
+</body>
+
+</html>

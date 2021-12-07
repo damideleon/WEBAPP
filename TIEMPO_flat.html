@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pronóstico del Tiempo</title>
+	<link rel="stylesheet" href="wheather-icons.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap" rel="stylesheet">
+	<script src="./handlebars.min-v4.7.7.js"></script>
+	<script src="./d3.v4.min.js"></script>
+	<script src="./moment-with-locales.js"></script>
+	<script src="https://use.fontawesome.com/c9edd68435.js"></script>
+	<style>
+		*{ margin: 0; 
+			padding: 0; 
+			font-family: 'Roboto', sans-serif; 
+			color: #fff;
+		}
+
+		*::first-letter{
+			text-transform: capitalize;
+		}
+		
+		.container{
+			height: 100vh;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			/*background: skyblue;*/
+			/*background-image: url('./fondo\ 2.jpg');*/
+			background-size: cover;
+			background-attachment: fixed;
+			background-position: center;
+		}
+
+		.weather{
+			width: 1000px;
+			background: linear-gradient(353deg, rgba(0, 0, 0, 0.24) 16%, rgb(49, 49, 49) 91%); 
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+
+		.weather .title{
+			padding: 10px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			column-gap: 30px;
+			font-size: 1.2em;
+			color: seashell;
+			background-color: rgba(59, 8, 8, 0.7);
+		}
+
+
+		.tiempo-ahora{
+			display: grid; 
+			grid-template-columns: 1fr 2fr; 
+			grid-template-rows: 1fr; 
+			gap: 30px 30px; 
+			grid-template-areas: 
+				". . ."; 
+			font-size: 1.2em;
+			padding: 30px;
+		}
+
+		
+
+		.extendido{
+			display: grid; 
+			height: 300px;
+			background: #00000077;
+			grid-template-columns: 1fr 1fr 1fr; 
+			grid-template-rows: 1fr 1fr; 
+			gap: 0px 0px; 
+			grid-template-areas: 
+				". . ."
+				". . .";
+		}
+
+		
+		.dia-extendido{
+			display: flex;
+			flex-direction: row;
+			row-gap: 10px;
+			border-right: 3px solid #fff;
+			margin: 3px 0px;
+		}
+
+		.dia-extendido > div{
+			padding: 10px;
+		}
+
+		.icon-85{
+			width: 85px; height: 85px;
+			background-position: 0% 50%;
+			background-size: 80%;
+			background-repeat: no-repeat;
+		}
+
+		
+
+		.icon{
+			display: block;
+			height: 220px;
+			width: 220px;
+			background-size: contain;
+			background-position: center;
+		}
+		
+		.temp_now{
+			font-size: 5em;
+			color: seashell;
+			width: 200px;
+			text-shadow: #00000077 3px 3px 5px;
+		}
+
+		.tiempo-ahora .descripcion{
+			font-size: 2.5em;
+			line-height: 0.8em;
+			color: seashell;
+		}
+
+		.tiempo-ahora .descripcion::first-letter{
+			text-transform: uppercase;
+		}
+
+		.fino{
+			margin-top: 10px;
+			font-size: 1.2em;
+		}
+
+		.minmax{
+			font-size: 1.2em;
+			font-weight: 900;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		
+		<div class="weather" id="pronostico">
+			
+
+		</div>
+	</div>
+
+	<script id="t-pronostico" type="text/x-handlebars-template">
+		<div class="title">
+			<div>Pronóstico del Tiempo</div>
+			<div>Asunción, Py</div>
+		</div>
+		<div class="tiempo-ahora">
+			<div>
+				<div class="icon w-{{hoy.icon}}">
+					<div class="temp_now">
+						{{temperatura current.temp}}º
+					</div>
+				</div>
+				<div class="minmax">Min.: {{temperatura hoyPronostico.temp.min}}º  Max.: {{temperatura hoyPronostico.temp.max}}º</div>
+			</div>
+			<div class="fino">
+				<div class="descripcion">
+					{{hoy.description}}
+				</div>
+				<div class="fino">
+					<div>
+						<span style="border-bottom: 1px solid #ccc;"> {{fecha current.dt}}</span>
+					</div>
+					
+					<div>Humedad: {{current.humidity}}%</div>
+					<div>Vientos del {{direccion current.wind_deg}} a {{current.wind_speed}}Km/h </div>
+					<div>Presión: 981.7 hPa</div>
+					<div>Sensación Térmica: 31.0°C</div>
+				</div>
+				
+			</div>
+		</div>
+		<div class="extendido">
+			{{#each extendido}}
+			<div class="dia-extendido">
+				<div>
+					{{#each weather}}
+						<div class="icon-85 w-{{icon}}"></div>
+					{{/each}}
+				</div>
+				<div>
+					<h3>{{diaDeLaSemana dt}} <br> <small>{{semana dt}}</small></h3>
+					{{#each weather}}
+						<h2>{{description}}</h2>
+					{{/each}}
+					<p>{{temperatura temp.min}}º - {{temperatura temp.max}}º C</p>
+				</div>
+			</div>
+			{{/each}}
+		</div>
+	</script>
+
+	
+	<script defer>
+		var pronostico_data = {};
+
+		Handlebars.registerHelper({
+			"fecha" : function(unix) {
+				var date = new Date(unix * 1000);
+				return moment(date).locale("es-mx").format("dddd, D MMMM YYYY");
+			},
+			"diaDeLaSemana" : function(unix) {
+				var date = new Date(unix * 1000);
+				return moment(date).locale("es-mx").format("dddd");
+			},
+			"semana" : function(unix) {
+				var date = new Date(unix * 1000);
+				return moment(date).locale("es-mx").format("D [de] MMMM");
+			},
+			"temperatura" : function(k) {
+				return Math.round(k - 273.15);
+			},
+			"direccion": function(num) {
+				var val = Math.floor((num / 22.5) + 0.5);
+				var arr = [	"norte", "nor-noreste", "noreste",
+							"este noreste", "este", "este sureste",
+							"sureste", "sur sureste", "sur",
+							"sur suroeste", "sur oeste", "oeste suroeste",
+							"oeste", "oeste noreste", "noroeste",
+							"norte noroeste"];
+				return arr[(val % 16)];
+			},
+
+		})
+
+		
+		function pronostico(info){
+			//info = info.daily.splice(0, 1);
+			info.hoy = info.current.weather[0];
+			info.hoyPronostico = info.daily[0]
+			info.extendido = info.daily.slice(1,7);
+
+			pronostico_data = info;
+
+			let source = document.getElementById("t-pronostico").innerHTML;
+            let html = Handlebars.compile(source);
+            //document.getElementById("info-pronostico").innerHTML = html(info);
+			document.getElementById("pronostico").innerHTML = html(info);
+		}
+
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				pronostico(JSON.parse(this.responseText));
+			}
+		};
+
+		const url =  "https://api.openweathermap.org/data/2.5/onecall?lat=-25.30066&lon=-57.63591&exclude=minutely&lang=es&appid=f497ad49d905eec750c1c273a9ae8351"
+		xhttp.open("GET", url, true)
+		xhttp.send();
+
+	</script>
+</body>
+</html>

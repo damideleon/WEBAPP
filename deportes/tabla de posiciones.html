@@ -25,7 +25,7 @@
 	</div>
 	<script id="t-tabla" type="text/x-handlebars-template">
 		<div class="titulos">
-			<div class="titulo"><div class="deporte">{{titulo}}</div> <div class="torneo">{{torneo}}</div></div>
+			<div class="titulo"><div class="deporte">Fútbol de Primera</div> <div class="torneo">Torneo Clausura 2021</div></div>
 			<div class="subtitulo">Tabla de posiciones</div>
 		</div>
 		<div class="tab-container">
@@ -51,11 +51,11 @@
 					<td class="p" style="background-image: url('./escudos/{{logo equipo}}.png');"> 
 					</td>
 					<td class="g">{{normal equipo}}</td>
-					<td class="n pt">{{puntos}}</td>
+					<td class="n pt">{{pts}}</td>
 					<td class="n">{{pj}}</td>
-					<td class="n">{{pg}}</td>
-					<td class="n">{{pe}}</td>
-					<td class="n">{{pp}}</td>
+					<td class="n">{{g}}</td>
+					<td class="n">{{e}}</td>
+					<td class="n">{{p}}</td>
 					<td class="n">{{gf}}</td>
 					<td class="n">{{gc}}</td>
 					<td class="n">{{dif}}</td>
@@ -87,7 +87,7 @@
 				document.getElementById("data").innerHTML = html(tabla_info);
 			}
 		};
-		xhttp.open("GET", "./tabla_de_posiciones_paraguay.json", true);
+		xhttp.open("GET", "./paraguay.apf.posiciones.2021.json", true);
 		xhttp.send();
 	};
 	tabla();

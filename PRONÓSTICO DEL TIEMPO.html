@@ -30,7 +30,7 @@
 		}
 
 		.weather{
-			width: 747px;
+			
 			padding: 30px;
 			background-color: rgba(11, 16, 77, 0.849);
 			background: linear-gradient(353deg, rgba(255,255,255,1) 16%, rgba(255,255,255,1) 40%, rgba(221,218,218,1) 91%); 
@@ -125,7 +125,7 @@
 
 
 		.now_temperature {
-			font-size: 5.3em;
+			font-size: 9em;
 		}
 
 		.current_icon{
@@ -144,17 +144,10 @@
 	<div class="container">
 		<div class="weather">
 			<div class="head">
-				<span class="title">Pronóstico del tiempo</span>  <span class="city">Asunción, PY</span>
+				<span class="title">El tiempo ahora</span>  <span class="city">Asunción, PY</span>
 			</div>	
 			<div class="chart">
-				<div class="current_temperature" id="ahora">
-					<div class="now_temperature"></div>
-					<div class="current_descripcion">
-						<div class="current_icon"></div>
-						<span class="ahora_descri"></span>
-					</div>
-					
-				</div>
+				<div class="current_temperature" id="ahora"></div>
 			</div>
 			<div class="body-pronostico" id="info-pronostico"> 
 				
@@ -167,17 +160,25 @@
 	</div>
 
 	<script id="t-ahora" type="text/x-handlebars-template">
-		<div class="now_temperature">
-			{{temperatura current.temp}}º
-		</div>
 		<div class="current_descripcion">
+			<div class="now_temperature">
+				{{temperatura current.temp}}º
+			</div>
 			{{#each current.weather}}
-				<div class="current_icon" 
-					 style="background-image: url(&quot;http://openweathermap.org/img/wn/{{icon}}@2x.png&quot;);">
-				</div>
 				<span class="ahora_descri">{{description}}</span>
 			{{/each}}
 		</div>
+		<div class="data-tiempo">
+			
+			<div class="current_descripcion">
+				{{#each current.weather}}
+					<div class="current_icon" 
+						 style="background-image: url(&quot;http://openweathermap.org/img/wn/{{icon}}@2x.png&quot;);">
+					</div>
+				{{/each}}
+			</div>
+		</div>
+		
 		<div class="hora"><svg></svg></div>
 	</script>
 
@@ -223,7 +224,7 @@
             let html = Handlebars.compile(source);
 			let ahora = document.getElementById("t-ahora").innerHTML;
 			let ahoraHMTL = Handlebars.compile(ahora)
-            document.getElementById("info-pronostico").innerHTML = html(info);
+            //document.getElementById("info-pronostico").innerHTML = html(info);
 			document.getElementById("ahora").innerHTML = ahoraHMTL(info);
 			drawChart(parseData(pronostico_data));
 		}

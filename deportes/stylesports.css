@@ -32,7 +32,7 @@ div {
 	
 	background: #333333; /* fallback for old browsers */
 	  background: -webkit-linear-gradient(to top, #111111, #AB1B39); /* Chrome 10-25, Safari 5.1-6 */
-	  background: linear-gradient(to top, #111111, #AB1B39); 
+	  background: linear-gradient(to top, #AB1B39, #111111); 
 	background-size: 100% 200%;
 	background-repeat: no-repeat;
 	/*animation: movebackground 15s ease-in-out infinite;*/
@@ -42,7 +42,7 @@ div {
 	
 	display: flex;
 	flex-direction: column;
-	width: 50%;
+	width: 1200px;
 	margin: auto;
 }
 
@@ -59,23 +59,23 @@ div {
 	justify-content: space-between;
 	align-items: center;
 	font-size: 1.70vw;
-	background-color: #EBEAEB;
+	background-color: #bb1414;
 	padding-left: 10px;
-	height: 63px;
+	height: 80px;
 }
 
 .titulo .deporte {
 	font-size: 1.7em;
-	color: #1B1417;
+	color: #ffffff;
 }
 
 .titulo .torneo {
-	background: #5B585E;
+	background: #171718;
 	padding: 0px 15px;
 	color: seashell;
 	text-transform: uppercase;
 	font-weight: 400;
-	font-size: .9em;
+	/*font-size: .9em;*/
 	height: 100%;
 	display: flex;
 	align-items: center;
@@ -95,7 +95,6 @@ div {
 .partido {
 	display: flex;
 	font-size: 1.5vw;
-	
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
@@ -120,20 +119,29 @@ div {
 	padding: 0 20px;
 	/*background: purple;*/
 	color: #272727;
-	font-size: 2.1em;
+	font-size: 1.5em;
 }
 
-.team-1{
-	text-align: left;
+.names{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	column-gap: 15px;
+	font-size: 1.8vw;
 }
+
+.vs{
+	color: #5B585E;
+}
+
 
 .logo {
 	display: flex;
-
+	
 	width: 200px;
-	height:200px;
+	height:80px;
 	background-position: center;
-	background-size:  auto 150px;
+	background-size:  auto 70px;
 	background-repeat: no-repeat;
 }
 
@@ -159,7 +167,7 @@ div {
 	color: #f1f1f1;
 	padding: 5px 10px;
 	font-family: 'Roboto';
-	font-size: 2em;
+	font-size: 1.3em;
 	font-weight: lighter;
 	margin-bottom:5px;
 }

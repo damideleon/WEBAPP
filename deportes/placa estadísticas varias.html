@@ -18,25 +18,52 @@
 		display: flex;
 		flex-direction: row;
 		column-gap: 30px;
+		margin-bottom: 30px;
+		
 	}
+
+	.info-data:last-child{
+		
+		margin-bottom: 0px;
+	}
+
+
 	.img-resena{
-		width: 300px; height: 400px;
+		width: 400px; height: 300px;
 		background: #ccc;
 		background-image: url("./img/jcc.jpg");
 		background-position: center;
 		background-size: cover;
+	}
+
+	.img-copalib{
+		background-image: url("./img/copalibertadores.jpg");
+	}
+
+	.img-copasud{
+		background-image: url("./img/sudamericana.jpg");
 	}
 	
 	.data-body{
 		width: calc(100% - 380px);
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
+		gap: 30px;
 		align-items: flex-start;
 	}
 
 	.data-body p {
 		font-size: 1.5em;
+	}
+
+	.data-body-text{
+		width: 98%;
+	}
+
+	.data-body-text h1, .data-body-text h3 {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 
 	.table-resena{
@@ -52,43 +79,105 @@
 		<div class="main" id="data">
 			<div class="titulos">
 				<div class="titulo">
-					<div class="deporte">Julio César Cáceres</div>
-					<div class="torneo">Estadísticas</div>
+					<div class="deporte"> Copas Internacionales
+					</div>
+					<div class="torneo">Clasificación</div>
 				</div>
-				<div class="subtitulo">Campeón de la Copa Paraguay 2021</div>
+				
 			</div>
 			<div class="tab-container">
 				<div class="info-data">
-					<div class="img-resena"></div>
+					<div class="img-resena img-copalib">
+						<div class="copa-name">
+							Copa Libertadores
+						</div>
+					</div>
 					<div class="data-body">
-						<table class="table-resena">
-							<tr>
-								<td>Partidos</td>
-								<td class="n">6</td>
-							</tr>
-							<tr>
-								<td>Victorias</td>
-								<td class="n">2</td>
-							</tr>
-							<tr>
-								<td>Empates</td>
-								<td class="n">2</td>
-							</tr>
-							<tr>
-								<td>Derrotas</td>
-								<td class="n">2</td>
-							</tr>
-							<tr>
-								<td>Efectividad</td>
-								<td class="n">66%</td>
-							</tr>
-						</table>
-						<p>
-							<i class="icon icon-twitter"></i> @dvoamericapy
-						</p>
-
+						<div class="data-body-text">
+							<h3>FASE DE GRUPOS <small>Empieza el 5 de abril</small></h3>
+							<hr>
+							<h1>
+								<span>
+									Libertad 
+								</span>
+								<small>(Campeón del Apertura)</small>
+							</h1>
+							<h1>
+								<span>
+									Cerro Porteño
+								</span>
+								<small>(Campeón del Clausura)</small>
+							</h1>
+						</div>
+						<div class="data-body-text">
+							<h3>2DA FASE <small>22 de febrero al 3 de marzo </small></h3>
+							
+							<hr>
+						<h1>
+							<span>
+								Guaraní 
+							</span>
+							<small>(Acumulativo)</small>
+						</h1>
+						</div>
+						<div class="data-body-text">
+							<h3>1RA FASE <small>8 al 17 de febrero</small></h3>
+							<hr>
+						<h1>
+							<span>
+								Olimpia 
+							</span>
+							<small>(Acumulativo)</small>
+						</h1>
+						</div>
+						
+						
+						
+						
 					</div>
 				</div>
+				<div class="info-data">
+					<div class="img-resena img-copasud">
+						
+					</div>
+					<div class="data-body">
+						<div class="data-body-text">
+							<h3>Primera Fase <small>Empieza el 8 de marzo</small></h3>
+							<hr>
+							<h1>
+								<span>
+									Nacional
+								</span>
+								<small>(Acumulativo)</small>
+							</h1>
+							<h1>
+								<span>
+									Sol de América
+								</span>
+								<small>(Acumulativo)</small>
+							</h1>
+							<h1>
+								<span>
+									Guaireña
+								</span>
+								<small>(Acumulativo)</small>
+							</h1>
+							<h1>
+								<span>
+									General Caballero (JLM)
+								</span>
+								<small>(Campeón Intermedia)</small>
+							</h1>
+						</div>
+						
+						
+						
+						
+						
+					</div>
+				</div>
+				
+				
 			
 
 		</div>
